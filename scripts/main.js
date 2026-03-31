@@ -251,25 +251,66 @@
             return;
         }
 
+        // 收集表单数据
+        const formData = {
+            studentName: document.getElementById('student-name').value.trim(),
+            idCard: document.getElementById('id-card').value.trim(),
+            guardians: [
+                {
+                    name: document.getElementById('guardian1-name').value.trim(),
+                    phone: document.getElementById('guardian1-phone').value.trim(),
+                    workplace: document.getElementById('guardian1-workplace').value.trim()
+                }
+            ]
+        };
+
+        // 如果有第二个监护人
+        const guardian2Section = document.getElementById('guardian2-section');
+        if (!guardian2Section.classList.contains('hidden')) {
+            formData.guardians.push({
+                name: document.getElementById('guardian2-name').value.trim(),
+                phone: document.getElementById('guardian2-phone').value.trim(),
+                workplace: document.getElementById('guardian2-workplace').value.trim()
+            });
+        }
+
         // 显示加载状态
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
 
-        // 模拟提交（实际应用中替换为 API 调用）
-        setTimeout(function() {
+        // 调用后端 API
+        fetch('/api/submissions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(result => {
             submitBtn.classList.remove('loading');
             submitBtn.disabled = false;
 
-            // 显示成功弹窗
-            showSuccessModal();
-
-            // 保存到 localStorage
-            saveToLocalStorage();
-
-            // 清空表单
-            form.reset();
-            resetGuardians();
-        }, 1500);
+            if (result.success) {
+                // 显示成功弹窗
+                showSuccessModal();
+                
+                // 清空表单
+                form.reset();
+                resetGuardians();
+                
+                // 清除 localStorage
+                localStorage.removeItem('enrollmentForm');
+            } else {
+                alert('提交失败：' + (result.message || '请重试'));
+            }
+        })
+        .catch(error => {
+            console.error('提交失败:', error);
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+            alert('提交失败，请检查网络连接后重试');
+        });
     }
 
     // ========== 显示成功弹窗 ==========
