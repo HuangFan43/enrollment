@@ -12,7 +12,8 @@
       "dest": "/server.js"
     },
     {
-      "src": "/(.*)",
+      "check": true,
+      "source": "/(.*)",
       "dest": "/server.js"
     }
   ]

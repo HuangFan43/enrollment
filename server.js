@@ -30,8 +30,20 @@ if (!fs.existsSync(DATA_FILE)) {
 app.use(cors());
 app.use(express.json());
 
-// 静态文件服务（前端页面）
-app.use(express.static(__dirname));
+// 静态文件服务（前端页面）- Vercel 环境需要特殊处理
+app.use(express.static(__dirname, {
+    maxAge: '1h',
+    setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.html')) {
+            res.setHeader('Cache-Control', 'no-cache');
+        }
+    }
+}));
+
+// Vercel 需要 fallback 到 index.html
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 // 首页 fallback
 app.get('/', (req, res) => {
