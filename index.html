@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="学校招生信息填报系统">
+    <title>招生信息登记 - 学校招生系统</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-to-main">跳过导航</a>
+
+    <!-- 页面头部 -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="page-title">2026年秋季招生信息登记</h1>
+            <p class="page-subtitle">请填写以下信息来完成报名登记</p>
+        </div>
+    </header>
+
+    <!-- 主内容区域 -->
+    <main id="main-content" class="main-content">
+        <div class="container">
+            <form id="enrollment-form" class="enrollment-form" novalidate>
+                
+                <!-- 学生基本信息 -->
+                <section class="form-card">
+                    <h2 class="card-title">学生基本信息</h2>
+                    
+                    <div class="form-group">
+                        <label for="student-name" class="form-label">
+                            学生姓名 <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="student-name" 
+                            name="studentName" 
+                            class="form-input" 
+                            placeholder="请输入学生姓名"
+                            maxlength="20"
+                            required
+                        >
+                        <p class="error-message" id="student-name-error"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id-card" class="form-label">
+                            身份证号码 <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="id-card" 
+                            name="idCard" 
+                            class="form-input" 
+                            placeholder="请输入18位身份证号码"
+                            maxlength="18"
+                            required
+                        >
+                        <p class="error-message" id="id-card-error"></p>
+                    </div>
+                </section>
+
+                <!-- 监护人信息 -->
+                <section class="form-card">
+                    <h2 class="card-title">监护人信息</h2>
+                    
+                    <div id="guardians-container">
+                        <!-- 监护人 1 -->
+                        <div class="guardian-section" data-index="1">
+                            <h3 class="guardian-title">监护人 1</h3>
+                            
+                            <div class="form-group">
+                                <label for="guardian1-name" class="form-label">
+                                    监护人姓名 <span class="required">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="guardian1-name" 
+                                    name="guardian1Name" 
+                                    class="form-input guardian-name" 
+                                    placeholder="请输入监护人姓名"
+                                    maxlength="20"
+                                    required
+                                >
+                                <p class="error-message" id="guardian1-name-error"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="guardian1-phone" class="form-label">
+                                    手机号码 <span class="required">*</span>
+                                </label>
+                                <input 
+                                    type="tel" 
+                                    id="guardian1-phone" 
+                                    name="guardian1Phone" 
+                                    class="form-input guardian-phone" 
+                                    placeholder="请输入11位手机号码"
+                                    maxlength="11"
+                                    required
+                                >
+                                <p class="error-message" id="guardian1-phone-error"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="guardian1-workplace" class="form-label">
+                                    工作单位
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="guardian1-workplace" 
+                                    name="guardian1Workplace" 
+                                    class="form-input" 
+                                    placeholder="请输入工作单位（选填）"
+                                    maxlength="50"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- 监护人 2（默认隐藏） -->
+                        <div class="guardian-section hidden" data-index="2" id="guardian2-section">
+                            <div class="guardian-header">
+                                <h3 class="guardian-title">监护人 2</h3>
+                                <button type="button" class="btn-remove-guardian" data-index="2" aria-label="删除监护人2">
+                                    ✕ 删除
+                                </button>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="guardian2-name" class="form-label">
+                                    监护人姓名 <span class="required">*</span>
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="guardian2-name" 
+                                    name="guardian2Name" 
+                                    class="form-input guardian-name" 
+                                    placeholder="请输入监护人姓名"
+                                    maxlength="20"
+                                >
+                                <p class="error-message" id="guardian2-name-error"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="guardian2-phone" class="form-label">
+                                    手机号码 <span class="required">*</span>
+                                </label>
+                                <input 
+                                    type="tel" 
+                                    id="guardian2-phone" 
+                                    name="guardian2Phone" 
+                                    class="form-input guardian-phone" 
+                                    placeholder="请输入11位手机号码"
+                                    maxlength="11"
+                                >
+                                <p class="error-message" id="guardian2-phone-error"></p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="guardian2-workplace" class="form-label">
+                                    工作单位
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="guardian2-workplace" 
+                                    name="guardian2Workplace" 
+                                    class="form-input" 
+                                    placeholder="请输入工作单位（选填）"
+                                    maxlength="50"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 添加监护人按钮 -->
+                    <button type="button" id="add-guardian-btn" class="btn-add-guardian">
+                        + 添加监护人
+                    </button>
+                </section>
+
+                <!-- 隐私声明 -->
+                <section class="form-card privacy-card">
+                    <div class="privacy-notice">
+                        <p>📌 <strong>隐私声明：</strong>您填写的信息将仅用于学校招生登记，我们将严格保护您的个人信息安全。</p>
+                    </div>
+                </section>
+
+                <!-- 提交按钮 -->
+                <div class="form-actions">
+                    <button type="button" id="reset-btn" class="btn btn-secondary">重置表单</button>
+                    <button type="submit" id="submit-btn" class="btn btn-primary">
+                        <span class="btn-text">提交信息</span>
+                        <span class="btn-loading">
+                            <span class="spinner"></span>
+                            提交中...
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- 成功弹窗 -->
+    <div id="success-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-icon success">✓</div>
+            <h2 class="modal-title">提交成功！</h2>
+            <p class="modal-message">您的招生信息已成功提交，我们会在第一时间与您联系。</p>
+            <button type="button" id="modal-close-btn" class="btn btn-primary">确定</button>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="page-footer">
+        <div class="container">
+            <p>&copy; 2026 学校招生办公室 | 联系电话：123-4567-8900</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
