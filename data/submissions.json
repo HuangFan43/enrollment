@@ -1,3 +1,17 @@
 {
-  "submissions": []
+  "submissions": [
+    {
+      "id": "f0477f6d-451b-4ccd-9c51-15dbf9ffc3d4",
+      "studentName": "Huang",
+      "idCard": "430725199902217417",
+      "guardians": [
+        {
+          "name": "HuangFan",
+          "phone": "13111111111",
+          "workplace": ""
+        }
+      ],
+      "createdAt": "2026-03-31T07:49:26.018Z"
+    }
+  ]
 }

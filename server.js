@@ -17,6 +17,14 @@ const DATA_FILE = path.join(__dirname, 'data', 'submissions.json');
 app.use(cors());
 app.use(express.json());
 
+// 静态文件服务（前端页面）
+app.use(express.static(__dirname));
+
+// 首页 fallback
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // 读取数据
 function readData() {
     try {

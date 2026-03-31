@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>招生管理后台 - 数据管理</title>
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>🎓 招生管理</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active" data-page="dashboard">
+                    <span class="nav-icon">📊</span> 数据概览
+                </a>
+                <a href="#" class="nav-link" data-page="submissions">
+                    <span class="nav-icon">📋</span> 报名记录
+                </a>
+                <a href="#" class="nav-link" data-page="export">
+                    <span class="nav-icon">📥</span> 数据导出
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="/" class="nav-link">← 返回报名页面</a>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 数据概览页 -->
+            <section id="page-dashboard" class="page active">
+                <div class="page-header">
+                    <h1>数据概览</h1>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📝</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="stat-total">0</div>
+                            <div class="stat-label">总报名数</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="stat-today">0</div>
+                            <div class="stat-label">今日报名</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="stat-guardians">0</div>
+                            <div class="stat-label">监护人数量</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 最近报名 -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>最近报名</h3>
+                        <button class="btn btn-sm" onclick="loadSubmissions()">🔄 刷新</button>
+                    </div>
+                    <div class="card-body">
+                        <table class="data-table" id="recent-table">
+                            <thead>
+                                <tr>
+                                    <th>学生姓名</th>
+                                    <th>身份证号</th>
+                                    <th>监护人</th>
+                                    <th>报名时间</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="4" class="loading">加载中...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 报名记录页 -->
+            <section id="page-submissions" class="page">
+                <div class="page-header">
+                    <h1>报名记录</h1>
+                    <div class="page-actions">
+                        <button class="btn btn-primary" onclick="exportData('csv')">📥 导出 CSV</button>
+                        <button class="btn btn-secondary" onclick="exportData('json')">📥 导出 JSON</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <table class="data-table" id="submissions-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>学生姓名</th>
+                                    <th>身份证号</th>
+                                    <th>监护人1</th>
+                                    <th>监护人2</th>
+                                    <th>报名时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="7" class="loading">加载中...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 数据导出页 -->
+            <section id="page-export" class="page">
+                <div class="page-header">
+                    <h1>数据导出</h1>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="export-options">
+                            <div class="export-option">
+                                <h3>📄 CSV 导出</h3>
+                                <p>适合在 Excel 中打开和分析</p>
+                                <button class="btn btn-primary" onclick="exportData('csv')">导出 CSV</button>
+                            </div>
+                            <div class="export-option">
+                                <h3>📋 JSON 导出</h3>
+                                <p>适合程序读取和备份</p>
+                                <button class="btn btn-primary" onclick="exportData('json')">导出 JSON</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>导出预览</h3>
+                    </div>
+                    <div class="card-body">
+                        <pre id="export-preview" class="code-preview">点击导出按钮预览数据...</pre>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="scripts/admin.js"></script>
+</body>
+</html>
