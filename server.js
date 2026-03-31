@@ -1,6 +1,6 @@
 /**
  * 招生信息填报系统 - 后端服务
- * REST API + 数据持久化
+ * 支持 Vercel / 本地运行
  */
 
 const express = require('express');
@@ -11,7 +11,20 @@ const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const DATA_FILE = path.join(__dirname, 'data', 'submissions.json');
+
+// Vercel 环境判断
+const isVercel = process.env.VERCEL === '1';
+const DATA_FILE = isVercel 
+    ? '/tmp/submissions.json' 
+    : path.join(__dirname, 'data', 'submissions.json');
+
+// 如果不是 Vercel 环境且文件不存在，创建空数据文件
+if (!isVercel && !fs.existsSync(path.dirname(DATA_FILE))) {
+    fs.mkdirSync(path.dirname(DATA_FILE));
+}
+if (!fs.existsSync(DATA_FILE)) {
+    fs.writeFileSync(DATA_FILE, '{"submissions":[]}', 'utf8');
+}
 
 // 中间件
 app.use(cors());
